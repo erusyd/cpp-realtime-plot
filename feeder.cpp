@@ -1,5 +1,4 @@
 #include "feeder.h"
-#include <iostream>
 
 Feeder::Feeder() : m_(0), cv_(0), notified_(0), done_(0) {}
 
