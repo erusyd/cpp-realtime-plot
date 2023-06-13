@@ -28,8 +28,6 @@ public:
     void getNewData();
     void startPlotter(int argc, char *argv[]);
 
-    // wrapping GLUT to c++ with singleton design pattern is based on
-    // http://paulsolt.com/blog/2009/07/openglglut-classes-oop-and-problems
     static void displayWrapper();
     static void reshapeWrapper(int w, int h);
     static void idleWrapper();
