@@ -1,16 +1,17 @@
 #ifndef FEEDER_H
 #define FEEDER_H
 
-#include <thread>
 #include <condition_variable>
 #include <mutex>
 #include <queue>
 #include <random>
+#include <thread>
 
 class Feeder {
 public:
     Feeder();
-    Feeder(std::mutex *mutex, std::condition_variable *cond_var, bool *notified, bool *done, std::queue<double> *data);
+    Feeder(std::mutex *mutex, std::condition_variable *cond_var, bool *notified,
+           bool *done, std::queue<double> *data);
     ~Feeder();
     void run();
 

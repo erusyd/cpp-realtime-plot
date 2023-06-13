@@ -2,25 +2,24 @@
 
 # executable and directories
 EXEC = plot
-SDIR = source
-IDIR = include
-LDIR = -L/home/brahim/Work/tools/matplotpp/lib
 ODIR = obj
-BDIR = build
 
 #compile and link flags
 CXX    = g++ -std=c++14 -Wall
-CFLAGS = -I$(IDIR) -I/home/brahim/Work/tools/matplotpp/include
-LIBS   = $(LDIR) -rdynamic -lmatplotpp -lGLU -lGL -lglut -lpthread
+CFLAGS = -I./
+LDFLAGS=-L.
+LIBS   = -l:matplotpp.a -lGLU -lGL -lglut -lpthread
 
-SRC = $(wildcard $(SDIR)/*.cpp)
-OBJ = $(patsubst $(SDIR)/%.cpp, $(ODIR)/%.o, $(SRC))
+SRC = $(wildcard *.cpp)
+OBJ = $(patsubst %.cpp, $(ODIR)/%.o, $(SRC))
 
-$(BDIR)/$(EXEC): $(OBJ)
-	$(CXX) -o $(BDIR)/$(EXEC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(LIBS) 
+$(EXEC): $(OBJ)
+	$(CXX) -o $(EXEC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(LIBS) 
 
-$(ODIR)/%.o: $(SDIR)/%.cpp
+$(ODIR)/%.o: %.cpp
 	$(CXX) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm $(ODIR)/* $(BDIR)/$(EXEC)
+	rm -rf $(ODIR) $(EXEC)
+
+$(shell mkdir -p $(ODIR))
