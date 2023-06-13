@@ -14,16 +14,14 @@ Version:0.3.15
 #include <valarray>
 #include <vector>
 
-using namespace std;
-
 #define PI 3.14159265358979323846264
 
-typedef vector<double> dvec;
-typedef vector<vector<double>> dmat;
-typedef vector<vector<float>> tcvec;         // true color vector
-typedef vector<vector<vector<float>>> tcmat; // true color matrix
-typedef vector<float> tc;                    // true color
-typedef vector<float> tcolor;                // true color
+typedef std::vector<double> dvec;
+typedef std::vector<std::vector<double>> dmat;
+typedef std::vector<std::vector<float>> tcvec; // true color vector
+typedef std::vector<std::vector<std::vector<float>>> tcmat; // true color matrix
+typedef std::vector<float> tc; // true color
+typedef std::vector<float> tcolor; // true color
 
 /// glutCreate Window
 inline int glutCreateWindow(int left, int top, int width, int height, char c[])
@@ -33,11 +31,13 @@ inline int glutCreateWindow(int left, int top, int width, int height, char c[])
     glutInitWindowSize(width, height);
     return glutCreateWindow(c);
 };
+
 inline int glutCreateWindow(int left, int top, int width, int height)
 {
     char c[] = "MATPLOT++";
     return glutCreateWindow(left, top, width, height, c);
 };
+
 /// Primitives //
 class Figure { ///
 public:
@@ -45,7 +45,7 @@ public:
     // int Status;// 0:minimized, 1:default position, 2:maximized
     int Position[4]; // left top width height
     int Visible;
-    vector<int> Children;
+    std::vector<int> Children;
 
     void add_child(int i);
     Figure(int id_)
@@ -64,8 +64,8 @@ class Layer { ///
 public:
     int id;
     int Visible;
-    string layername;
-    vector<int> Children;
+    std::string layername;
+    std::vector<int> Children;
     Layer(int id_);
     void add_child(int i);
 };
@@ -96,31 +96,31 @@ public:
 
     int View; // 0:2D, 1:3D
 
-    vector<vector<float>> ColorMap; // for colorbar
+    std::vector<std::vector<float>> ColorMap; // for colorbar
 
     // Matlab variables //
     // styles
     int Box; // 0:Off, 1:On
-    string GridLineStyle;
+    std::string GridLineStyle;
     float LineWidth;
-    string TickDir; // {in} | out
-    // string TickDirMode;
+    std::string TickDir; // {in} | out
+    // std:string TickDirMode;
     // TickLength
     int Visible;             // 0:Off, 1:On
     int XGrid, YGrid, ZGrid; // {0:Off}, 1:On
 
     // General Information
     int Parent;
-    vector<int> Children;
+    std::vector<int> Children;
     int Selected;
     float Position[4];   // left bottom width height
     float Viewport3d[4]; // left bottom width height
 
     // Scale
-    string XAxisLocation;
-    string YAxisLocation;
+    std::string XAxisLocation;
+    std::string YAxisLocation;
 
-    // string XDir,YDir,ZDir;
+    // std:string XDir,YDir,ZDir;
 
     double XLim[2], YLim[2], ZLim[2]; // plot range
     int XLimMode, YLimMode, ZLimMode; // 0:Auto 1:Manual
@@ -128,7 +128,7 @@ public:
     int XScale, YScale, ZScale; // 0:linear | 1:log
 
     dvec XTick, YTick, ZTick;
-    string XTickMode, YTickMode, ZTickMode;
+    std::string XTickMode, YTickMode, ZTickMode;
     int TickLabel; // 0:Off, {1:On}
     // View
     float CameraPosition[3];
@@ -136,12 +136,12 @@ public:
     float CameraUpVector[3];
 
     // Label
-    string Title;
-    string XLabel, YLabel, ZLabel;
+    std::string Title;
+    std::string XLabel, YLabel, ZLabel;
 
     // Mapping of color
     double CLim[2];
-    string CLimMode; // {auto} | manual
+    std::string CLimMode; // {auto} | manual
     dvec CTick;      // not in matlab
 
     Axes(int id_)
@@ -226,42 +226,42 @@ class Colorbar { ///
 public:
     // Appearence
     tc color;
-    string box;
+    std::string box;
     float LineWidth;
-    string Label;
+    std::string Label;
     // location and size
-    string Location;
+    std::string Location;
     float Position[4]; // left bottom width height
-    string Units;
+    std::string Units;
 
     // Ticks and label
     dvec Ticks;
-    string TickMode;
-    string TickLabels;
-    string TickLabelsMode;
-    string TickLabelsInterpreter;
-    string Direction;
-    string AxisLocation;
-    string AxisLocationMode;
-    string TickDirection;
+    std::string TickMode;
+    std::string TickLabels;
+    std::string TickLabelsMode;
+    std::string TickLabelsInterpreter;
+    std::string Direction;
+    std::string AxisLocation;
+    std::string AxisLocationMode;
+    std::string TickDirection;
     float TickLength;
     double Limits[2];
-    string LimitsMode;
+    std::string LimitsMode;
 };
 
 class Legend { ///
 public:
-    string TextColor;
-    string Color; // background color
+    std::string TextColor;
+    std::string Color; // background color
     int Box;
-    string EdgeColor;
+    std::string EdgeColor;
     float LineWidth;
-    string Location;
-    string Orientation;
+    std::string Location;
+    std::string Orientation;
     float Position[4];
-    string Units;
-    string String;
-    // string Interpreter;
+    std::string Units;
+    std::string String;
+    // std::string Interpreter;
 };
 class Line { ///
 public:
@@ -279,16 +279,16 @@ public:
     // dmat EData,UData,LData;
     // dmat VData,WData;
 
-    string Color;
-    string LineStyle; // {-} | - - | : | -. | none
+    std::string Color;
+    std::string LineStyle; // {-} | - - | : | -. | none
     float LineWidth;
-    string Marker; // {none}
+    std::string Marker; // {none}
     float MarkerSize;
-    string MarkerEdgeColor;
-    string MarkerFaceColor;
+    std::string MarkerEdgeColor;
+    std::string MarkerFaceColor;
 
     int Clipping;
-    // string EraseMode;
+    // std::string EraseMode;
     int SelectionHighlight;
     int Visible;
 
@@ -317,35 +317,35 @@ class Surface { ///
 public:
     int type;
     int id;
-    string ColorMap;
+    std::string ColorMap;
 
     // dvec XData,YData;
     dvec V; // for contour plot
     int NContour;
 
     // Face //
-    string FaceColor; // ColorSpec    | none | {flat}
+    std::string FaceColor; // ColorSpec    | none | {flat}
 
     // Edge //
-    string EdgeColor; // ColorSpec{k} | none | flat
-    // string EdgeAlpha
-    // string EdgeLighting
-    string LineStyle; // {-} | - - | : | -. | none
+    std::string EdgeColor; // ColorSpec{k} | none | flat
+    // std::string EdgeAlpha
+    // std::string EdgeLighting
+    std::string LineStyle; // {-} | - - | : | -. | none
     float LineWidth;
-    // string AlignVertexCenters
-    // string MeshStyle
+    // std::string AlignVertexCenters
+    // std::string MeshStyle
 
     // Maker //
-    string Marker; // {none}
+    std::string Marker; // {none}
     float MarkerSize;
-    string MarkerEdgeColor;
-    string MarkerFaceColor;
+    std::string MarkerEdgeColor;
+    std::string MarkerFaceColor;
 
     // Color mapping //
     dmat CDataIndex;
     tcmat CData;         // true color
-    string CDataMapping; //{scaled} | direct
-    string CDataMode;    // {auto} | manual
+    std::string CDataMapping; //{scaled} | direct
+    std::string CDataMode;    // {auto} | manual
 
     // Data //
     dmat XData, YData, ZData;
@@ -377,10 +377,10 @@ public:
     }
     void get()
     {
-        cout << "FaceColor: " << FaceColor << endl;
-        cout << "EdgeColor: " << EdgeColor << endl;
-        cout << "LineStyle: " << LineStyle << endl;
-        cout << "LineWidth: " << LineWidth << endl;
+        std::cout << "FaceColor: " << FaceColor << std::endl;
+        std::cout << "EdgeColor: " << EdgeColor << std::endl;
+        std::cout << "LineStyle: " << LineStyle << std::endl;
+        std::cout << "LineWidth: " << LineWidth << std::endl;
     }
 };
 // Note:
@@ -390,7 +390,7 @@ class Patch { ///
 public:
     int id;
     int type;
-    vector<vector<int>> Faces;
+    std::vector<std::vector<int>> Faces;
     dmat Vertices;
     dmat FaceVertexCData;
     dmat XData, YData, ZData;
@@ -400,9 +400,9 @@ public:
     // tcmat CData;
     tcvec CData;
 
-    string EdgeColor, FaceColor; //{ColorSpec}|none|flat|interp
+    std::string EdgeColor, FaceColor; //{ColorSpec}|none|flat|interp
 
-    string LineStyle; // {-} | - - | : | -. | none
+    std::string LineStyle; // {-} | - - | : | -. | none
     float LineWidth;
 
     Patch(int id_)
@@ -420,7 +420,7 @@ public:
 class Text { ///
 public:
     int id;
-    string String;
+    std::string String;
     float Position[3];
     int Parent;
     int type; // 0:axis 1:figure
@@ -451,7 +451,7 @@ private:
     int is_debug1;
     int is_debug2;
 
-    vector<vector<float>> cmap; // TODO: move to class Figure
+    std::vector<std::vector<float>> cmap; // TODO: move to class Figure
 
     int mode;       // 0:initialization 1:configuration
     int init_level; // initialization level of objects
@@ -477,15 +477,15 @@ private:
     Legend *clg;
 
     // objects containers //
-    vector<Figure> vFigure;
-    vector<Layer> vLayer;
-    vector<Axes> vAxes;
-    vector<Line> vLine;
-    vector<Surface> vSurface;
-    vector<Patch> vPatch;
-    vector<Text> vText;
-    vector<Colorbar> vColorbar;
-    vector<Legend> vLegend;
+    std::vector<Figure> vFigure;
+    std::vector<Layer> vLayer;
+    std::vector<Axes> vAxes;
+    std::vector<Line> vLine;
+    std::vector<Surface> vSurface;
+    std::vector<Patch> vPatch;
+    std::vector<Text> vText;
+    std::vector<Colorbar> vColorbar;
+    std::vector<Legend> vLegend;
 
     // objects counter //
     int iFigure;
@@ -561,9 +561,9 @@ public:
     void inline debug1() { is_debug1 = 1; }
     void inline debug2() { is_debug2 = 1; }
 
-    vector<double> linspace(double min, double max, int n)
+    std::vector<double> linspace(double min, double max, int n)
     {
-        vector<double> a;
+        std::vector<double> a;
         if (n < 1) {
             n = 1;
         }
@@ -574,9 +574,9 @@ public:
         return a;
     };
 
-    valarray<double> valinspace(double min, double max, int n)
+    std::valarray<double> valinspace(double min, double max, int n)
     {
-        valarray<double> a;
+        std::valarray<double> a;
         a.resize(n);
         for (int i = 0; i < n; ++i) {
             a[i] = min + (max - min) * i / (n - 1);
@@ -594,9 +594,9 @@ public:
 
     // Layer ///
     int layer();
-    // int layer(string s);
-    int layer(string s, int Visible);
-    int frame(string s, int Visible); // do not use
+    // int layer(std::string s);
+    int layer(std::string s, int Visible);
+    int frame(std::string s, int Visible); // do not use
 
     // Axes ///
 
@@ -613,24 +613,24 @@ public:
               double zMax);
     void caxis(double cMin, double cMax);
 
-    void axis(string s);
+    void axis(std::string s);
     void axis(int s);
 
-    void grid(string s);
+    void grid(std::string s);
     void grid(int s);
 
-    void ticklabel(string s);
+    void ticklabel(std::string s);
     void ticklabel(int s);
 
-    void title(string s);
-    void xlabel(string s);
-    void ylabel(string s);
-    void zlabel(string s);
+    void title(std::string s);
+    void xlabel(std::string s);
+    void ylabel(std::string s);
+    void zlabel(std::string s);
 
     // void xlim(double min,double max);
-    // void xlim(string s);
+    // void xlim(std::string s);
 
-    // void legend(string s,int N);
+    // void legend(std::string s,int N);
 
     // int plotyy
 
@@ -638,12 +638,12 @@ public:
     void mouse_capture(float *xmouse, float *ymouse);
 
     // set, General Object Handling ///
-    void set(string v);
+    void set(std::string v);
     void set(float v);
-    void set(string p, float v);
-    void set(string p, string v);
-    void set(int h, string p, string v);
-    void set(int h, string p, float v);
+    void set(std::string p, float v);
+    void set(std::string p, std::string v);
+    void set(int h, std::string p, std::string v);
+    void set(int h, std::string p, float v);
     int gco();
 
     // Line ///
@@ -664,7 +664,7 @@ public:
     // int plot(dmat Y);
     // int plot(dvec x,dmat Y);
     // int plot(dmat X,dmat Y);
-    int plot(valarray<double> x, valarray<double> y);
+    int plot(std::valarray<double> x, std::valarray<double> y);
 
     int plot3(dvec x, dvec y, dvec z);
     // int plot3(dvec X,dvec Y,dvec Z);
@@ -690,7 +690,7 @@ public:
     // Surface, Contour ///
     dmat peaks(int n);
     // dmat peaks(int m,int n);
-    // dmat peaks(int m,int n,string type);
+    // dmat peaks(int m,int n,std::string type);
 
     int surface();
     int surface(dmat Z);
@@ -754,35 +754,35 @@ public:
 
     // int bar(Y)
     // int bar(Y,float width);
-    // int bar(Y,string style);
-    // int bar(Y,float width,string style);
+    // int bar(Y,std::string style);
+    // int bar(Y,float width,std::string style);
 
     // int bar(x,Y)
     // int bar(x,Y,float width);
-    // int bar(x,Y,string style);
-    // int bar(x,Y,float width,string style);
+    // int bar(x,Y,std::string style);
+    // int bar(x,Y,float width,std::string style);
 
     // int hist(y);
     // int hist(y,x);
     // int hist(y,nbins);
 
     // int pie(dvec x);
-    // int pie(dvec x, vector<int> Explode);
+    // int pie(dvec x, std::vector<int> Explode);
 
     // Text ///
     // TODO: more fonts
     int text();
-    int text(double x, double y, string s);
+    int text(double x, double y, std::string s);
     void set_font(char font_[], int size);
-    void ptext(float x, float y, string s);
-    void ptext3(float x, float y, float z, string s);
-    void ptext3c(float x, float y, float z, string s);
+    void ptext(float x, float y, std::string s);
+    void ptext3(float x, float y, float z, std::string s);
+    void ptext3c(float x, float y, float z, std::string s);
 
     // Colors ///
     void color(float r, float g, float b);
-    vector<float> colormap(string c, float t);
-    void colormap(string c);
-    void colormap(vector<vector<float>> c);
+    std::vector<float> colormap(std::string c, float t);
+    void colormap(std::string c);
+    void colormap(std::vector<std::vector<float>> c);
 
     void gray();
     void jet();
@@ -794,13 +794,13 @@ public:
     void autumn();
     void winter();
 
-    vector<float> map2color(double x, double xmin, double xmax);
+    std::vector<float> map2color(double x, double xmin, double xmax);
 
-    void Shading(string c);
-    void shading(string c);
-    vector<float> ColorSpec2RGB(string c);
-    string rgb2colorspec(vector<float> rgb);
-    tcolor colorspec2rgb(string c);
+    void Shading(std::string c);
+    void shading(std::string c);
+    std::vector<float> ColorSpec2RGB(std::string c);
+    std::string rgb2colorspec(std::vector<float> rgb);
+    tcolor colorspec2rgb(std::string c);
     // print ///
     void print();
 };

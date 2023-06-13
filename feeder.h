@@ -10,14 +10,14 @@
 class Feeder {
 public:
     Feeder();
-    Feeder(std::mutex *mutex, std::condition_variable *cond_var, bool *notified,
+    Feeder(std::mutex *m, std::condition_variable *cv, bool *notified,
            bool *done, std::queue<double> *data);
     ~Feeder();
     void run();
 
 private:
-    std::mutex *mutex_;
-    std::condition_variable *cond_var_;
+    std::mutex *m_;
+    std::condition_variable *cv_;
     bool *notified_, *done_;
     std::queue<double> *data_;
     std::mt19937 gen_;

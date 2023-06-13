@@ -1,11 +1,11 @@
 #ifndef PLOTTER_H
 #define PLOTTER_H
 
+#include "matplotpp.h"
 #include <condition_variable>
 #include <iostream>
 #include <mutex>
 #include <queue>
-#include "matplotpp.h"
 
 inline void wait_on_enter()
 {
@@ -20,8 +20,8 @@ protected:
 
 public:
     Plotter();
-    Plotter(std::mutex *mutex, std::condition_variable *cond_var,
-            bool *notified, bool *done, std::queue<double> *data);
+    Plotter(std::mutex *m, std::condition_variable *cv, bool *notified,
+            bool *done, std::queue<double> *data);
     virtual ~Plotter();
 
     int is_run = 1;
@@ -43,8 +43,8 @@ private:
     void DISPLAY();
     std::vector<double> x, z;
 
-    std::mutex *mutex_;
-    std::condition_variable *cond_var_;
+    std::mutex *m_;
+    std::condition_variable *cv_;
     bool *notified_, *done_;
     std::queue<double> *data_;
 };
