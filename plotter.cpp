@@ -88,8 +88,8 @@ void Plotter::DISPLAY()
 
 void Plotter::getNewData()
 {
+    const int N = 50;
     static uint64_t cnt = 0;
-    int N = 50;
     if (is_run) {
         while (!data_->empty()) {
             x.push_back(cnt + 1);
