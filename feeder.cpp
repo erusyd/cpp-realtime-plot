@@ -8,7 +8,6 @@ Feeder::Feeder(std::mutex *mutex, std::condition_variable *cond_var,
     : mutex_(mutex), cond_var_(cond_var), notified_(notified), done_(done),
       data_(data)
 {
-
     unsigned int seed = 0; // std::random_device{}()
     gen_.seed(seed);
     dist_ = std::uniform_real_distribution<double>(0.0, 1.0);
@@ -18,7 +17,6 @@ Feeder::~Feeder() {}
 
 void Feeder::run()
 {
-
     for (int i = 0; i < 1000; ++i) {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
         std::unique_lock<std::mutex> lock(*mutex_);

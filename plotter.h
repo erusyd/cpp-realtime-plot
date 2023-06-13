@@ -5,8 +5,6 @@
 #include <iostream>
 #include <mutex>
 #include <queue>
-
-using namespace std;
 #include "matplotpp.h"
 
 inline void wait_on_enter()

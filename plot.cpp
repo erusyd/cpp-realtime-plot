@@ -4,9 +4,7 @@
 int main(int argc, char *argv[])
 {
     std::mutex m;
-    std::condition_variable
-        cond_var; // condition variable
-                  // https://fr.cppreference.com/w/cpp/thread/condition_variable
+    std::condition_variable cond_var;
     bool done = false;
     bool notified = false;
     std::queue<double> data;

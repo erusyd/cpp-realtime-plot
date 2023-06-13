@@ -62,7 +62,6 @@ void Plotter::keyboardWrapper(unsigned char key, int x, int y)
 
 void Plotter::startPlotter(int argc, char *argv[])
 {
-
     // Initialize GLUT
     glutInit(&argc, argv);
     glutCreateWindow(100, 100, 700, 600);
