@@ -1,10 +1,10 @@
 # cpp-realtime-plot
-realtime plot in c++ using matplotpp https://github.com/yuichikatori/matplotpp
-two threads: one for plotting and another for feed data
+realtime plot in c++ using matplotpp https://github.com/yuichikatori/matplotpp\
+two threads: one for plotting and another for feed data\
 one class to handle plot and another to generate data
 
 # todo
-add explanations
+add explanations\
 clean code
 
 # remarks
